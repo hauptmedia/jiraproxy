@@ -3,14 +3,12 @@ class RESTRequest {
     protected $ch;
     protected $acceptType;
     protected $contentType;
-
-
     protected $requestBody;
-    protected $requestLength;
 
 
     protected $timeout = 60;
     protected $ssl_verifypeer = false;
+    protected $additionalHttpHeaders = array();
 
     public function __construct() {
         $this->ch           = curl_init();
@@ -28,23 +26,40 @@ class RESTRequest {
         $this->ch = curl_init();
 
         $this->requestBody       = null;
-        $this->requestLength     = 0;
     }
 
-    protected function execute () {
+    public function addAdditionalHttpHeader($s_header) {
+        array_push($this->additionalHttpHeaders, $s_header);
+    }
+
+    protected function execute() {
         $this->setCurlOpts();
-        $result = curl_exec($this->ch);
+
+        $s_result   = curl_exec($this->ch);
+        $a_info     = curl_getinfo($this->ch);
+
+        if( !in_array( $a_info['http_code'], array(200, 201) ) ) {
+            throw new Exception('Received unexpected HTTP response code ' . $a_info['http_code']);
+        }
+
         $this->reset();
-        return $result;
+
+        $o_result   = json_decode( $s_result );
+        return $o_result;
     }
 
     protected function setCurlOpts () {
         curl_setopt($this->ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, array (
-            'Accept: ' . $this->acceptType, $this->contentType,
-            'X-Atlassian-Token: nocheck'
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER,
+            array_merge(
+                array (
+                    'Accept: ' . $this->acceptType,
+                    $this->contentType
+                ),
+                $this->additionalHttpHeaders
             )
+
         );
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
     }
@@ -53,13 +68,13 @@ class RESTRequest {
         curl_setopt($this->ch, CURLOPT_USERPWD, $username . ':' . $password);
     }
 
-    public function attachFile($name, $filename) {
-        $fileContents = file_get_contents($filename);
+    public function attachFile($s_name, $s_filename) {
+        $fileContents = file_get_contents($s_filename);
         $boundary = "----------------------------".substr(md5(rand(0,32000)), 0, 12);
 
         $data = "--".$boundary."\r\n";
-        $data .= "Content-Disposition: form-data; name=\"".$name."\"; filename=\"".basename($this->filename)."\"\r\n";
-        $data .= "Content-Type: ".mime_content_type($this->filename)."\r\n";
+        $data .= "Content-Disposition: form-data; name=\"".$s_name."\"; filename=\"".basename($s_filename)."\"\r\n";
+        $data .= "Content-Type: ".mime_content_type($s_filename)."\r\n";
         $data .= "\r\n";
         $data .= $fileContents."\r\n";
         $data .= "--".$boundary."--";
@@ -77,7 +92,12 @@ class RESTRequest {
     public function post ($url, $data = null) {
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_POST, true);
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        if( $this->requestBody ) {
+            curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->requestBody);
+        } else {
+            curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($data));
+        }
 
         return $this->execute();
     }

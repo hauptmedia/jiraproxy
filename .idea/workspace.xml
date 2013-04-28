@@ -4,8 +4,11 @@
     <list default="true" id="65d9ac78-916e-4aa2-9472-e4116b4bfc85" name="Default" comment="" />
     <ignored path="jiraproxy.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/RESTRequest.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367184946598" ignored="false" />
-    <file path="/index.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367185228201" ignored="false" />
+    <file path="/RESTRequest.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367192326527" ignored="false" />
+    <file path="/index.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367190845288" ignored="false" />
+    <file path="/JiraRequest.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367189126045" ignored="false" />
+    <file path="/a.dummy" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367187025458" ignored="false" />
+    <file path="/JiraConnector.php" changelist="65d9ac78-916e-4aa2-9472-e4116b4bfc85" time="1367192524927" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +28,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.6756757">
+            <state line="28" column="9" selection-start="526" selection-end="526" vertical-scroll-proportion="-17.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JiraConnector.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JiraConnector.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="22" selection-start="857" selection-end="857" vertical-scroll-proportion="0.9459459">
               <folding />
             </state>
           </provider>
@@ -37,7 +49,7 @@
       <file leaf-file-name="RESTRequest.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RESTRequest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="69" selection-start="2761" selection-end="2761" vertical-scroll-proportion="-55.0">
+            <state line="30" column="43" selection-start="684" selection-end="707" vertical-scroll-proportion="-15.0">
               <folding />
             </state>
           </provider>
@@ -53,15 +65,17 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/RESTRequest.php" />
+        <option value="$PROJECT_DIR$/JiraRequest.php" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/RESTRequest.php" />
+        <option value="$PROJECT_DIR$/JiraConnector.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="28" />
-    <option name="y" value="30" />
+    <option name="x" value="10" />
+    <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="725" />
   </component>
@@ -121,9 +135,17 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
     <list size="0" />
@@ -138,7 +160,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="28" y="30" width="1280" height="725" extended-state="0" />
+    <frame x="10" y="22" width="1280" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -221,16 +243,23 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RESTRequest.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="69" selection-start="2761" selection-end="2761" vertical-scroll-proportion="-55.0">
+        <state line="28" column="9" selection-start="526" selection-end="526" vertical-scroll-proportion="-17.5">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/RESTRequest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.6756757">
+        <state line="30" column="43" selection-start="684" selection-end="707" vertical-scroll-proportion="-15.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JiraConnector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="22" selection-start="857" selection-end="857" vertical-scroll-proportion="0.9459459">
           <folding />
         </state>
       </provider>

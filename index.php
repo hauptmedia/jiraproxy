@@ -1,25 +1,29 @@
 <?php
-include('RESTRequest.php');
+include_once('RESTRequest.php');
+include_once('JiraConnector.php');
 
-$o_request = new RESTRequest();
-$o_request->setBasicAuth( 'julian.haupt', 'l0g1n007' );
-
-$s_result = $o_request->post(
-    'http://jira.spielmeister.com/rest/api/2/issue/',
-    array(
-        "fields" => array(
-            "project" => array(
-                "key" => "SPELLJS"
-            ),
-
-            "summary" => "test",
-            "description" => "description",
-
-            "issuetype" => array(
-                "name" => "Bug"
-            )
-        )
-    )
+$o_jira_connector = new JiraConnector(
+    'http://jira.spielmeister.com',
+    'julian.haupt',
+    'l0g1n007'
 );
 
-print $s_result;
+try {
+    $o_result = $o_jira_connector->createIssue(
+        'SPELLJSPUB',
+        'Bug',
+        'Summary',
+        'description'
+    );
+
+    $o_result2 = $o_jira_connector->createAttachment(
+        $o_result->id,
+        'test.png'
+    );
+
+} catch (Exception $e) {
+    echo "ERR:" . $e->getmessage();
+}
+
+print_r($o_result);
+print_r($o_result2);
