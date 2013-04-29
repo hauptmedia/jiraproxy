@@ -83,10 +83,10 @@ class JiraConnector {
         return $o_result;
     }
 
-    public function createAttachment($s_issueId, $s_filename) {
+    public function createAttachment($s_issueId, $s_filename, $s_remote_filename = NULL) {
         $o_request = $this->createRESTRequest();
 
-        $o_request->attachFile("file", $s_filename);
+        $o_request->attachFile("file", $s_filename, $s_remote_filename);
 
         $o_result = $o_request->post(
             $this->url . '/rest/api/2/issue/' . $s_issueId . '/attachments'

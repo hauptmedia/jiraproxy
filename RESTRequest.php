@@ -68,19 +68,23 @@ class RESTRequest {
         curl_setopt($this->ch, CURLOPT_USERPWD, $username . ':' . $password);
     }
 
-    public function attachFile($s_name, $s_filename) {
-        $fileContents = file_get_contents($s_filename);
-        $boundary = "----------------------------".substr(md5(rand(0,32000)), 0, 12);
+    public function attachFile($s_name, $s_filename, $s_remote_filename = NULL) {
+        if( !$s_remote_filename ) {
+            $s_remote_filename = basename($s_filename);
+        }
 
-        $data = "--".$boundary."\r\n";
-        $data .= "Content-Disposition: form-data; name=\"".$s_name."\"; filename=\"".basename($s_filename)."\"\r\n";
+        $fileContents = file_get_contents($s_filename);
+        $s_boundary = "----------------------------".substr(md5(rand(0,32000)), 0, 12);
+
+        $data = "--".$s_boundary."\r\n";
+        $data .= "Content-Disposition: form-data; name=\"".$s_name."\"; filename=\"".$s_remote_filename."\"\r\n";
         $data .= "Content-Type: ".mime_content_type($s_filename)."\r\n";
         $data .= "\r\n";
         $data .= $fileContents."\r\n";
-        $data .= "--".$boundary."--";
+        $data .= "--".$s_boundary."--";
 
         $this->requestBody = $data;
-        $this->contentType = 'Content-Type: multipart/form-data; boundary='.$boundary;
+        $this->contentType = 'Content-Type: multipart/form-data; boundary='.$s_boundary;
     }
 
     public function get($url) {
