@@ -4,13 +4,13 @@ include_once('JiraConnector.php');
 
 $o_jira_connector = new JiraConnector(
     'http://jira.spielmeister.com',
-    'julian.haupt',
-    'l0g1n007'
+    'public',
+    'ayFliHivVut0'
 );
 
 try {
     $o_result = $o_jira_connector->createIssue(
-        'SPELLJSPUB',
+        'SPELLJS',
         'Bug',
         'Summary',
         'description'
