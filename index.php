@@ -2,6 +2,11 @@
 include_once('RESTRequest.php');
 include_once('JiraConnector.php');
 
+if(!array_key_exists('action', $_REQUEST) || $_REQUEST['action'] != 'createIssue') {
+    echo "ERR:Not implemented";
+    exit;
+}
+
 $o_jira_connector = new JiraConnector(
     'http://jira.spielmeister.com',
     'public',
