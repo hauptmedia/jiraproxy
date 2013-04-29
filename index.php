@@ -39,7 +39,7 @@ try {
     $s_jira_summary = substr(
             str_replace(
             array("\r\n", "\n", "\r"),
-            '',
+            ' ',
             implode(' ', $a_jira_bug_report)
         ), 0, 99
     );
