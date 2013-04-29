@@ -26,6 +26,11 @@ try {
         array_push($a_jira_bug_report, $_REQUEST['version'] );
     }
 
+    if(count($a_jira_bug_report) == 0) {
+        echo "ERR:empty request";
+        exit;
+    }
+
     $s_jira_summary = substr(
             str_replace(
             array("\r\n", "\n", "\r"),
