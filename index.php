@@ -2,6 +2,8 @@
 include_once('RESTRequest.php');
 include_once('JiraConnector.php');
 
+header('Access-Control-Allow-Origin: *');
+
 if(!array_key_exists('action', $_REQUEST) || $_REQUEST['action'] != 'createIssue') {
     echo "ERR:Not implemented";
     exit;
